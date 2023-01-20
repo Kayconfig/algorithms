@@ -8,7 +8,7 @@ describe('Binary Search Test', () => {
   });
 
   test('should find item in between the haystack', () => {
-    const index = (hayStack.length / 2) | 0;
+    const index = Math.floor(hayStack.length / 2);
     const needle = hayStack[index];
     expect(binarySearch(hayStack, needle)).toBe(index);
   });

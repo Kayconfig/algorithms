@@ -5,7 +5,8 @@
  * @param needle item to search for.
  * @returns the index of the needle( if it exist) in the hayStack otherwise -1
  */
-export default function<T>(hayStack: Array<T>, needle: T): number {
+
+export default function<T>(hayStack: T[], needle: T): number {
   /**
    * Rules followed for implementation
    * - high index is exclusive
@@ -16,12 +17,14 @@ export default function<T>(hayStack: Array<T>, needle: T): number {
   let high = hayStack.length;
 
   do {
-    const middleIndex = (low + (high - low) / 2) | 0;
+    const middleIndex = Math.floor(low + (high - low) / 2);
     const value = hayStack[middleIndex];
 
     if (value === needle) {
       return middleIndex;
-    } else if (value > needle) {
+    }
+
+    if (value > needle) {
       high = middleIndex;
     } else {
       low = middleIndex + 1;

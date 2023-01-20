@@ -3,17 +3,21 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['standard-with-typescript', 'airbnb-base'],
+  extends: [
+    'eslint:recommended',
+    'standard-with-typescript',
+    'airbnb-base',
+    'airbnb-typescript',
+  ],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: ['./tsconfig.json'],
   },
   rules: {
-    quotes: ['error', 'single'],
-    'no-unused-vars': ['error', 'all'],
     'comma-dangle': ['error', 'always-multiline'],
-    semi: ['off'],
+    'react/jsx-filename-extension': 'off',
   },
   reportUnusedDisableDirectives: true,
 };
