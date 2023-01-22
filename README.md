@@ -10,11 +10,15 @@ Install dependencies
 
 ### yarn
 
-`>>> yarn`
+```bash
+yarn
+```
 
 ### npm
 
-`>>> npm install`
+```bash
+npm install
+```
 
 ### run tests
 
