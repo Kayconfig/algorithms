@@ -18,6 +18,7 @@ module.exports = {
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
     'react/jsx-filename-extension': 'off',
+    'no-plusplus': 'off',
   },
   reportUnusedDisableDirectives: true,
 };
