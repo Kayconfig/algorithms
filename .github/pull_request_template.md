@@ -9,7 +9,7 @@
 
 #### Key Changes
 
-- [List the changes to look for in this PR]
+- [List out the changes to look for in this PR]
 
 ### Check List
 
