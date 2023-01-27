@@ -29,7 +29,7 @@ yarn test
 or
 
 ```bash
-npx test
+npm run test
 ```
 
 ## Algorithm
