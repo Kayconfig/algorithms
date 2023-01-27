@@ -5,8 +5,8 @@ export interface LinkedList<T> {
   append: (item: T) => void;
   prepend: (item: T) => void;
   getLength: () => number;
-  get: (index: number) => T | undefined;
-  remove: (item: T) => T | undefined;
+  get: (index: number) => Node<T> | T | undefined;
+  remove: (item: T) => Node<T> | T | undefined;
 }
 
 export interface Node<T> {
