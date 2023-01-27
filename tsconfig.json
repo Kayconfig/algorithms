@@ -6,7 +6,8 @@
     "baseUrl": "./src",
     "paths": {
       "@binarySearch/*": ["binarySearch/*"],
-      "@bubbleSort/*": ["bubbleSort/*"]
+      "@bubbleSort/*": ["bubbleSort/*"],
+      "@linkedList/*": ["linkedList/*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,
