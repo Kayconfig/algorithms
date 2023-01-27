@@ -16,9 +16,10 @@ module.exports = {
     project: ['./tsconfig.json'],
   },
   rules: {
-    'comma-dangle': ['error', 'always-multiline'],
+    'comma-dangle': 'off',
     'react/jsx-filename-extension': 'off',
     'no-plusplus': 'off',
+    '@typescript-eslint/comma-dangle': 'warn',
   },
   reportUnusedDisableDirectives: true,
 };

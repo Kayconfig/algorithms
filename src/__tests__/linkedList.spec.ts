@@ -74,7 +74,8 @@ describe('LinkedList', () => {
 
     test('should get item by index', () => {
       Array(6).forEach((_, index, arr) => {
-        const node = list.get(index, true) as Node<number>;
+        const shouldReturnNode = true;
+        const node = list.get(index, shouldReturnNode) as Node<number>;
         expect(node.value).toBe(values[index]);
         if (index > 0) {
           expect(node.prev?.value).toBe(values[index - 1]);
@@ -90,7 +91,11 @@ describe('LinkedList', () => {
 
     test('should remove item', () => {
       Array(6).forEach((_, index) => {
-        const removedNode = list.remove(values[index], true) as Node<number>;
+        const shouldReturnNode = true;
+        const removedNode = list.remove(
+          values[index],
+          shouldReturnNode
+        ) as Node<number>;
         expect(removedNode.value).toBe(values[index]);
         expect(list.getLength()).toBe(values.length - 2 - index);
         expect(removedNode.prev).toBeUndefined();
