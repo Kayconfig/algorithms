@@ -23,13 +23,13 @@ npm install
 ### run tests
 
 ```bash
-yarn jest
+yarn test
 ```
 
 or
 
 ```bash
-npx jest
+npx test
 ```
 
 ## Algorithm
