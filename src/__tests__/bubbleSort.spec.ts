@@ -1,4 +1,4 @@
-import bubbleSort from '../bubbleSort';
+import bubbleSort from 'bubbleSort';
 
 describe('Bubble Sort Test', () => {
   const items = [23, 1, 3, 2, 5, 4, 7, 6, 10, 8, 9];

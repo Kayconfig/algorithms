@@ -1,4 +1,4 @@
-import binarySearch from '../binarySearch';
+import binarySearch from 'binarySearch';
 
 describe('Binary Search Test', () => {
   const hayStack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 24, 27, 38];
