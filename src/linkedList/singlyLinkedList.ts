@@ -134,6 +134,52 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
 
     return undefined;
   }
+
+  /**
+   * removes item from the given index if index exists
+   * @param {T} item - The item to remove from the list.
+   * @returns The value of the node that was removed if value exist otherwise returns undefined.
+   */
+  removeAt(index: number, shouldReturnNode = false): Node<T> | T | undefined {
+    if (this.length === 0 || index === this.length) {
+      return undefined;
+    }
+
+    // index refers to head
+    if (index === 0 && this.head !== undefined) {
+      const prevHead = this.head;
+      this.head = prevHead.next;
+      // head node is also the tail node, update tail as well
+      if (this.length === 1) {
+        this.tail = this.head;
+      }
+      // disconnect previous head
+      prevHead.next = undefined;
+      // update length;
+      this.length--;
+      return shouldReturnNode ? prevHead : prevHead.value;
+    }
+
+    let currNode = this.head;
+    let currIndex = 0;
+    while (currNode?.next !== undefined) {
+      const nextNode = currNode.next;
+      const nextNodeValue = nextNode.value;
+      if (index === currIndex + 1) {
+        currNode.next = nextNode.next;
+        if (nextNode.next === undefined) {
+          // we about to remove the tail, update tail to point to head
+          this.tail = currNode;
+        }
+        this.length--;
+        return shouldReturnNode ? nextNode : nextNodeValue;
+      }
+      currNode = currNode.next;
+      currIndex++;
+    }
+
+    return undefined;
+  }
 }
 
 export default SinglyLinkedList;
