@@ -1,3 +1,4 @@
+import SinglyLinkedList from '@linkedList/singlyLinkedList';
 import { QueueI } from '@queue/types';
 import Queue from 'queue';
 
@@ -5,7 +6,8 @@ let queue: QueueI<number>;
 
 describe('Queue', () => {
   beforeAll(() => {
-    queue = new Queue<number>();
+    const singlyLinkedList = new SinglyLinkedList<number>();
+    queue = new Queue<number>(singlyLinkedList);
   });
 
   test('should enqueue and peek item', () => {
