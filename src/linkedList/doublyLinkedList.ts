@@ -1,6 +1,6 @@
-import { LinkedList, Node } from './types';
+import { LinkedListI, Node } from './types';
 
-export class DoublyLinkedList<T> implements LinkedList<T> {
+export class DoublyLinkedList<T> implements LinkedListI<T> {
   private head: Node<T> | undefined;
 
   private tail: Node<T> | undefined;
@@ -141,6 +141,60 @@ export class DoublyLinkedList<T> implements LinkedList<T> {
         return returnNode ? nextNode : nextNode.value;
       }
       currNode = currNode.next;
+    }
+    return undefined;
+  }
+
+  /**
+   * removes the item at the given index from the list
+   * @param {number} index - the index of the item to remove
+   * @param [returnNode=false] - boolean - if true, the removed node is
+   * returned, otherwise the value of the removed node is returned
+   * @returns The value of the node or Node that was removed.
+   */
+  removeAt(index: number, returnNode = false): Node<T> | T | undefined {
+    if (this.head === undefined) {
+      return undefined;
+    }
+
+    if (index === 0) {
+      const prevHead = this.head;
+      this.head = this.head.next;
+      if (this.head !== undefined) {
+        this.head.prev = undefined;
+      }
+      this.length--;
+
+      if (this.length === 1 && this.tail !== undefined) {
+        this.tail.prev = undefined;
+      }
+
+      prevHead.next = undefined;
+      return returnNode ? prevHead : prevHead.value;
+    }
+
+    let currNode = this.head;
+    let currIndex = 0;
+    while (currNode.next !== undefined) {
+      const nextNode = currNode.next;
+      const nextNodeValue = nextNode.value;
+      if (currIndex + 1 === index) {
+        this.length--;
+        currNode.next = nextNode.next;
+        if (nextNode.next !== undefined) {
+          nextNode.next.prev = currNode;
+        } else {
+          // nextNode is the tail, update tail reference
+          this.tail = currNode;
+        }
+
+        // diconnect nextNode
+        nextNode.next = undefined;
+        nextNode.prev = undefined;
+        return returnNode ? nextNode : nextNodeValue;
+      }
+      currNode = currNode.next;
+      currIndex++;
     }
     return undefined;
   }

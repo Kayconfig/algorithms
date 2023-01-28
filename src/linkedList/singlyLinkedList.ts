@@ -1,6 +1,6 @@
-import { LinkedList, Node } from './types';
+import { LinkedListI, Node } from './types';
 
-export class SinglyLinkedList<T> implements LinkedList<T> {
+export class SinglyLinkedList<T> implements LinkedListI<T> {
   private head: Node<T> | undefined;
 
   private tail: Node<T> | undefined;
@@ -137,7 +137,8 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
 
   /**
    * removes item from the given index if index exists
-   * @param {T} item - The item to remove from the list.
+   * @param {number} index - The index of item to remove from the list.
+   * @param {boolean} shouldReturnNode - setting to true, returns a node instead of its value
    * @returns The value of the node that was removed if value exist otherwise returns undefined.
    */
   removeAt(index: number, shouldReturnNode = false): Node<T> | T | undefined {

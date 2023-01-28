@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-delimiter-style */
-export interface LinkedList<T> {
+export interface LinkedListI<T> {
   getHead: () => T | undefined;
   getTail: () => T | undefined;
   append: (item: T) => void;
@@ -7,6 +7,10 @@ export interface LinkedList<T> {
   getLength: () => number;
   get: (index: number, shouldReturnNode?: boolean) => Node<T> | T | undefined;
   remove: (item: T, shouldReturnNode?: boolean) => Node<T> | T | undefined;
+  removeAt: (
+    index: number,
+    shouldReturnNode?: boolean
+  ) => Node<T> | T | undefined;
 }
 
 export interface Node<T> {

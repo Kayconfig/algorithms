@@ -1,13 +1,8 @@
-import { Node } from '@linkedList/types';
-import { SinglyLinkedList } from 'linkedList';
+import { LinkedListI, Node } from '@linkedList/types';
 import { QueueI } from './types';
 
 export class Queue<T> implements QueueI<T> {
-  private readonly list: SinglyLinkedList<T>;
-
-  constructor() {
-    this.list = new SinglyLinkedList();
-  }
+  constructor(readonly list: LinkedListI<T>) {}
 
   enqueue(item: T): Queue<T> {
     this.list.append(item);

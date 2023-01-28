@@ -1,10 +1,10 @@
 import DoublyLinkedList from '@linkedList/doublyLinkedList';
-import { LinkedList, Node } from '@linkedList/types';
+import { LinkedListI, Node } from '@linkedList/types';
 import SinglyLinkedList from 'linkedList/singlyLinkedList';
 
 describe('LinkedList', () => {
   describe('SinglyLinkedList', () => {
-    let list: LinkedList<number>;
+    let list: LinkedListI<number>;
     beforeAll(() => {
       list = new SinglyLinkedList<number>();
     });
@@ -51,7 +51,7 @@ describe('LinkedList', () => {
   });
 
   describe('DoublyLinkedList', () => {
-    let list: LinkedList<number>;
+    let list: LinkedListI<number>;
     beforeAll(() => {
       list = new DoublyLinkedList<number>();
     });
