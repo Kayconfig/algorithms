@@ -1,11 +1,15 @@
 import DoublyLinkedList from '@linkedList/doublyLinkedList';
-import { Node } from '@linkedList/types';
+import { LinkedList, Node } from '@linkedList/types';
 import SinglyLinkedList from 'linkedList/singlyLinkedList';
 
 describe('LinkedList', () => {
   describe('SinglyLinkedList', () => {
-    const list = new SinglyLinkedList<number>();
+    let list: LinkedList<number>;
+    beforeAll(() => {
+      list = new SinglyLinkedList<number>();
+    });
     const values = [1, 2, 3, 4, 5, 6];
+
     test('should append item', () => {
       list.append(4);
       expect(list.getLength()).toBe(1);
@@ -47,7 +51,10 @@ describe('LinkedList', () => {
   });
 
   describe('DoublyLinkedList', () => {
-    const list = new DoublyLinkedList<number>();
+    let list: LinkedList<number>;
+    beforeAll(() => {
+      list = new DoublyLinkedList<number>();
+    });
     const values = [1, 2, 3, 4, 5, 6];
     test('should append item', () => {
       list.append(4);
