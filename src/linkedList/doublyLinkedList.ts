@@ -93,6 +93,45 @@ export class DoublyLinkedList<T> implements LinkedListI<T> {
     return undefined;
   }
 
+  private pop(shouldReturnNode = false): Node<T> | undefined | T {
+    if (this.tail === undefined) {
+      return undefined;
+    }
+
+    const prevTail = this.tail;
+
+    // update tail reference
+    this.tail = prevTail.prev;
+    if (this.tail !== undefined) this.tail.next = undefined;
+
+    prevTail.prev = undefined;
+    this.length--;
+
+    // Update head and tail
+    if (this.length === 0) this.head = this.tail;
+
+    return shouldReturnNode ? prevTail : prevTail.value;
+  }
+
+  private shift(shouldReturnNode = false): Node<T> | undefined | T {
+    if (this.head === undefined) {
+      return undefined;
+    }
+    const prevHead = this.head;
+
+    // update reference to head
+    this.head = prevHead.next;
+    if (this.head !== undefined) this.head.prev = undefined;
+
+    prevHead.next = undefined;
+    this.length--;
+
+    // reset tail and head
+    if (this.length === 0) this.tail = this.head;
+
+    return shouldReturnNode ? prevHead : prevHead.value;
+  }
+
   /**
    * removes the item from the list
    * @param {T} item - the item to remove
@@ -100,59 +139,51 @@ export class DoublyLinkedList<T> implements LinkedListI<T> {
    * returned, otherwise the value of the removed node is returned
    * @returns The value of the node or Node that was removed.
    */
-  remove(item: T, returnNode = false): Node<T> | T | undefined {
+  remove(item: T, shouldReturnNode = false): Node<T> | T | undefined {
     if (this.head === undefined) {
       return undefined;
     }
 
-    if (this.head.value === item) {
-      const prevHead = this.head;
-      this.head = this.head.next;
-      if (this.head !== undefined) {
-        this.head.prev = undefined;
-      }
-      this.length--;
-
-      if (this.length === 1 && this.tail !== undefined) {
-        this.tail.prev = undefined;
-      }
-
-      prevHead.next = undefined;
-      return returnNode ? prevHead : prevHead.value;
+    if (item === this.head.value) {
+      return this.shift(shouldReturnNode);
+    }
+    if (item === this.tail?.value) {
+      return this.pop(shouldReturnNode);
     }
 
-    let currNode = this.head;
-    while (currNode.next !== undefined) {
-      const nextNode = currNode.next;
-      const nextNodeValue = nextNode.value;
-      if (nextNodeValue === item) {
+    let currNode: Node<T> | undefined = this.head;
+    while (currNode !== undefined) {
+      const currValue = currNode.value;
+
+      if (currValue === item) {
         this.length--;
-        currNode.next = nextNode.next;
-        if (nextNode.next !== undefined) {
-          nextNode.next.prev = currNode;
-        } else {
-          // nextNode is the tail, update tail reference
-          this.tail = currNode;
+        if (currNode.prev !== undefined) {
+          const prevNode = currNode.prev;
+          prevNode.next = currNode.next;
+        }
+        if (currNode.next !== undefined) {
+          const nextNode = currNode.next;
+          nextNode.prev = currNode.prev;
         }
 
-        // diconnect nextNode
-        nextNode.next = undefined;
-        nextNode.prev = undefined;
-        return returnNode ? nextNode : nextNode.value;
+        currNode.prev = undefined;
+        currNode.next = undefined;
+        return shouldReturnNode ? currNode : currValue;
       }
       currNode = currNode.next;
     }
+
     return undefined;
   }
 
   /**
    * removes the item at the given index from the list
    * @param {number} index - the index of the item to remove
-   * @param [returnNode=false] - boolean - if true, the removed node is
+   * @param [shouldReturnNode=false] - boolean - if true, the removed node is
    * returned, otherwise the value of the removed node is returned
    * @returns The value of the node or Node that was removed.
    */
-  removeAt(index: number, returnNode = false): Node<T> | T | undefined {
+  removeAt(index: number, shouldReturnNode = false): Node<T> | T | undefined {
     if (this.head === undefined) {
       return undefined;
     }
@@ -170,7 +201,7 @@ export class DoublyLinkedList<T> implements LinkedListI<T> {
       }
 
       prevHead.next = undefined;
-      return returnNode ? prevHead : prevHead.value;
+      return shouldReturnNode ? prevHead : prevHead.value;
     }
 
     let currNode = this.head;
@@ -191,7 +222,7 @@ export class DoublyLinkedList<T> implements LinkedListI<T> {
         // diconnect nextNode
         nextNode.next = undefined;
         nextNode.prev = undefined;
-        return returnNode ? nextNode : nextNodeValue;
+        return shouldReturnNode ? nextNode : nextNodeValue;
       }
       currNode = currNode.next;
       currIndex++;
