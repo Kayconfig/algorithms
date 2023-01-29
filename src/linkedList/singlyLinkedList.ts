@@ -142,7 +142,7 @@ export class SinglyLinkedList<T> implements LinkedListI<T> {
    * @returns The value of the node that was removed if value exist otherwise returns undefined.
    */
   removeAt(index: number, shouldReturnNode = false): Node<T> | T | undefined {
-    if (this.length === 0 || index === this.length) {
+    if (this.length === 0 || index === this.length || index < 0) {
       return undefined;
     }
 
