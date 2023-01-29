@@ -80,6 +80,7 @@ export class DoublyLinkedList<T> implements LinkedListI<T> {
    */
 
   get(index: number, returnNode = false): Node<T> | T | undefined {
+    if (index < 0) return undefined;
     let currIndex = 0;
     let currNode = this.head;
     while (currNode !== undefined) {
@@ -184,7 +185,7 @@ export class DoublyLinkedList<T> implements LinkedListI<T> {
    * @returns The value of the node or Node that was removed.
    */
   removeAt(index: number, shouldReturnNode = false): Node<T> | T | undefined {
-    if (this.head === undefined) {
+    if (this.head === undefined || index < 0 || index === this.length) {
       return undefined;
     }
 
