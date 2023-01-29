@@ -119,7 +119,6 @@ describe('LinkedList', () => {
 
         expect(removedNode.value).toBe(value);
         expect(list.getLength()).toBe(values.length - 1 - index);
-        console.log({ removedNode, value });
         expect(removedNode.prev).toBeUndefined();
         expect(removedNode.next).toBeUndefined();
       });
